@@ -22,7 +22,7 @@ const add = async ({ request, locals }) => {
 	const data = await request.formData();
 	const name = data.get('todo');
 	if (!name) {
-		return invalid(402, { invalid: true });
+		return invalid(402, { invalid: 'Please assign a Todo' });
 	}
 	/** @type {{token: string}} */
 	const { token } = { ...locals.session.data.user };
