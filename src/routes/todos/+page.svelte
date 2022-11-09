@@ -6,7 +6,7 @@
 	/** @type {import('./$types').ActionData} */
 	export let form;
 
-	$: console.log(data);
+	$: message = form?.invalid ?? '';
 	$: todos = data.todos;
 	// $: form && invalidate('app:todos');
 </script>
@@ -22,4 +22,7 @@
 <form use:enhance>
 	<input type="text" name="todo" />
 	<button formaction="?/add">Add</button>
+	{#if message}
+		<p class="error">{message}</p>
+	{/if}
 </form>

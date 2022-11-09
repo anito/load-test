@@ -29,7 +29,8 @@ const add = async ({ request, locals }) => {
 	const todo = { name, user_id: locals.session.data.user.id, done: false };
 	const res = await api.post('todos', { data: todo, token });
 	if (!res.success) {
-		throw invalid(402, { invalid: true });
+		const message = res.data?.message || res.message;
+		return invalid(402, { invalid: message });
 	}
 };
 /** @type {import("@sveltejs/kit").Action} */
